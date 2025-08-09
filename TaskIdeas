@@ -1,0 +1,14 @@
+- Expense tracker
+
+1. User module
+
+    CRUD for:
+        -   expense
+        -   accounts (bank, credit card, cash)
+        -   income
+
+    end point for:
+        -   total income for month, year, and day
+        -   total expense for month, year and day
+        -   total income specific for accounts
+        -   total expense using that account
