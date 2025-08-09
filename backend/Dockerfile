@@ -20,4 +20,4 @@ EXPOSE 3301
 
 # Command to run the application
 # ENTRYPOINT ["nodemon", "/usr/src/app/backend/server.js"]
-# CMD ["node", "server.js"]
+CMD ["node", "server.js"]
