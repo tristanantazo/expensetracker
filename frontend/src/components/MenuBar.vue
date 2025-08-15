@@ -7,7 +7,7 @@
         BAR
     </div>
     <div class="p-2 w-full text-right">
-        <div>Tristan Viel Antazo</div>
+        <div>Efril Mansilla</div>
     </div>
   </div>
 </template>
