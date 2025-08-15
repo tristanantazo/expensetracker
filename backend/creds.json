@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "expensetracker-469120",
+  "private_key_id": "b329472b8e14c9702fd550580416ab1c04f26a08",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDXS0KsIcOqC4Bc\nrhvEGYeZFn+wSvhN+dmI/N8Pm6UsEBPkE0S+V4dcb6kQoL2M8QL7YFQUDZ6HfuIU\nuCtLL3a1FYSi4ztKieXXxYGna1xYrT7vN0xUEnAZ0tSUZ4GRdHkdD20ZrUQOTyfM\ntvPoK/88rKQ4FaAk5BjO0wrYbgZ+cgzOOPXtVHhGehSUokOtnY0cTr3MRhqaH8G4\nqYRpD6Nt8GgrtmAjtgvrl8DNU3uprRGBI8wnwrxD2EtkCi42OTDpX6ue0xnuoJ9J\nxsIm8Y3Fsu6zmLrkUuz7F9bkQfSWHRk0nsuNN8dZALc2EjhPOfSCAsUH9uNPnxaN\ndE1wQ3cRAgMBAAECggEAANA9stpm17UUIi3O3s1D0VywdjNtxVzDSAgljAFXEwDw\n2Ab160XLicNjxY8W59vzlN7+28+mJvxKDS3EaqCXRRTMVlJzhKnzNlqw+ANzLWpy\njVojrbO28mtQoYnT0CCxoVe5sIGUIq5MOnU6NS/ICU7Je6jdHBLR/IiI25KuwDdG\nkgEzFKqH8pKokYdeF6zeoLESH3wEpoOnb04fEe9fjW/zEFHD/Dzs7J2UFwzktVFn\nt9b3CRkfkCDKXGhhLUpp7sRAkwtnbsv9v3lPVhupxhsm7YcNrphggF1PR3t1GUhd\nlrdXd2Ls0jTPHrbOVqk4//4jiisfmQuSd4WPo0ThRQKBgQD2XX4GpdZNhmbxs1x0\nSZpuorX+AW3/Fo9LtSg60oVrm0+L48Ghzs2UMeTkixiScVai6J1Hbj/XfxqoXiM8\n33zCYcgQw4D4qnufeodFEJfmB96k7ergEldLWGDAwS1nQaUv9RGNdONEtTh7Biio\nW8UJW3Xx2+uxYigz+uqKdK/tPwKBgQDftrIg+rMnCyLx08VnaYblhIpdX1SkocRv\nosGSo8bnH25zD4NXvysKeJUK6RspgkZgV0lOMm+C6v+AhbRX2j3ajZqpBhnsWEFv\nWuYY0XCch/d+VQixnMLwBCtV9AmtOhdIdPnC+jl3c16CMNtXHePT2e1NsQTP9Vev\nRIlHFUh3rwKBgQCc3tcaYIpeftAZ4v1hxmQhQlXj0QE7RiAkMsvU+Kuf4xr5liJ7\nZ3UbgdGffLo+tRBXVwqeqyLXksVko9yILD4Cf8Smd/YtYFCrMZfkcDZocGZiWmQO\nHV+cSEADPH4um2wVZ1Sv39e+ri2ymC9XVGfYF3a4dDJVlozG3GRvmPFUfQKBgQDe\n73Qxk0NG7D0lmjEFLc8lF+C+zcpOyXo0+Y9Hb3g+SD9L4DC2F6Zvp9x24/eSdOVn\nCnTdvTsMztxRGmyug6jSC/0M5SyeLxD+RCo6nzRGeOR0+45PWPWWM8FvxWKDQvmC\n1jczSyJLXCfZO5DJDttD+c8Wdgpipo579aOLt7TgtwKBgQCFWIkWXDykLnBclYAg\nWMs/iDydFUR8Ul2Ga1Ucd/sz8w/TXfdeFT8P0olvbuyrE7ZqRiAQ6JLZATNMmWqJ\nGCfRCveAr0iM4NkSv5iIRZNqb6znI25M/TTe2EDfigG5UmQQ3yurt4BfqRiYW527\nr6tLvoUAtJ51D36Fgt5DIYqGCA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "expense@expensetracker-469120.iam.gserviceaccount.com",
+  "client_id": "106061470693488677499",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/expense%40expensetracker-469120.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

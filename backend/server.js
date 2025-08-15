@@ -6,14 +6,15 @@ const app = express();
 
 const db = require('./app/config/dbInit');
 
-
 const model = db().collection('user');
+
+const { accessSpreadsheet } = require('./app/utils/GoogleAPI');
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/sample', async (req, res) => {
-  const result = await model.find().toArray();
+  const result = await accessSpreadsheet().catch(console.error);
   res.json(result)
 })
 
