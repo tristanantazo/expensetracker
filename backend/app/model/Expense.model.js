@@ -48,6 +48,10 @@ class Expense extends Base {
 
         return await this.update(filter, { $set : expense });
     }
+
+    async getAllExpense() {
+        return await this.all();
+    }
 }
 
 module.exports = Expense;
