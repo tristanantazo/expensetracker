@@ -1,9 +1,11 @@
 const { google } = require('googleapis');
-const keys = require('../../creds.json'); // path to your service account JSON file
+// const keys = require('../../creds.json'); // path to your service account JSON file
+require('dotenv').config();
+
 
 async function accessSpreadsheet() {
   const auth = new google.auth.GoogleAuth({
-    credentials: keys,
+    credentials: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
