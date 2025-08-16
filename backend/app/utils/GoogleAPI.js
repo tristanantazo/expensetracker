@@ -3,6 +3,8 @@ const { google } = require('googleapis');
 require('dotenv').config({ path: '/etc/secrets/.env' });
 
 
+console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+
 async function accessSpreadsheet() {
   const auth = new google.auth.GoogleAuth({
     credentials: process.env.GOOGLE_APPLICATION_CREDENTIALS,
