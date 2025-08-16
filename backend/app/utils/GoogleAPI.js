@@ -16,6 +16,7 @@ const keys = {
     "universe_domain":process.env.GOOGLE_SERVICE_ACCOUNT_UNIVERSE_DOMAIN,
   }
   
+console.log(keys)
 
 async function accessSpreadsheet() {
   const auth = new google.auth.GoogleAuth({
