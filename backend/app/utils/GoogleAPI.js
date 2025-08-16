@@ -2,7 +2,8 @@ const { google } = require('googleapis');
 // const keys = require('../../creds.json'); // path to your service account JSON file
 require('dotenv').config({ path: '/etc/secrets/.env' });
 
-console.log(process.env.GOOGLE_SERVICE_ACCOUNT_TYPE)
+console.log(process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_ID.replace(/\\n/g, '\n'))
+console.log(process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'))
 
 const keys = {
     "type": process.env.GOOGLE_SERVICE_ACCOUNT_TYPE,
