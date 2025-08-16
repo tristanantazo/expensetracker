@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 // const keys = require('../../creds.json'); // path to your service account JSON file
-require('dotenv').config();
+require('dotenv').config({ path: '/etc/secrets/.env' });
 
 
 async function accessSpreadsheet() {
