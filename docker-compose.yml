@@ -13,6 +13,9 @@ services:
       - ./backend:/usr/src/app/backend
       - /usr/src/app/backend/node_modules
     command: nodemon --verbose /usr/src/app/backend
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     networks:
       - exp_network
 

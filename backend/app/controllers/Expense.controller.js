@@ -15,7 +15,7 @@ const getExpenseById = async (req, res) => {
 
 const insertExpense = async (req, res) => {
     try {
-        let expense = await (new Expense).createDocument(req.body);
+        let expense = await (new Expense).create(req.body);
         res.json(responseSuccess(expense));
     } catch (error) {
         res.json({
@@ -26,8 +26,8 @@ const insertExpense = async (req, res) => {
 
 const deleteExpense = async (req, res) => {
     try {
-        await (new Expense).deleteDocument(req.body.id);
-        res.json(responseSuccess('success'));
+        let response = await (new Expense).deleteTransaction(req.body);
+        res.json(responseSuccess(response));
     } catch (error) {
         console.log(error)
         res.json({
@@ -38,7 +38,7 @@ const deleteExpense = async (req, res) => {
 
 const updateExpense = async (req, res) => {
     try {
-        let expense = await (new Expense).editDocument(req.body);
+        let expense = await (new Expense).editTransaction(req.body);
         res.json(responseSuccess(expense));
     } catch (error) {
         console.log(error)
@@ -50,7 +50,7 @@ const updateExpense = async (req, res) => {
 
 const getAllExpense = async (req, res) => {
     try {
-        let expense = await (new Expense).getAllExpense();
+        let expense = await (new Expense).all();
         res.json(responseSuccess(expense));
     } catch (error) {
         console.log(error)
