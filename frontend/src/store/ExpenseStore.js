@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { HandCoins, Utensils, CircleQuestionMark, TreePalm, MessageSquareHeart } from 'lucide-vue-next';
 
 // You can name the return value of `defineStore()` anything you want,
 // but it's best to use the name of the store and surround it with `use`
@@ -10,7 +11,18 @@ export const useExpenseStore = defineStore('expense', {
   state: () => (
     { 
       totalExpense: 0,
-      recentTransaction: []
+      recentTransaction: [],
+      categorySelection: [
+        { 'icon': HandCoins, 'value': 'Bj Allowance', 'label': "Bj Allowance"},
+        { 'icon': HandCoins, 'value': 'Tristan Allowance', 'label': "Tristan Allowance"},
+        { 'icon': Utensils, 'value': 'Lunch', 'label': "Lunch"},
+        { 'icon': Utensils, 'value': 'Dinner', 'label': "Dinner"},
+        { 'icon': Utensils, 'value': 'Breakfast', 'label': "Breakfast"},
+        { 'icon': TreePalm, 'value': 'Leisure', 'label': "Leisure"},
+        { 'icon': MessageSquareHeart, 'value': 'Date', 'label': "Date"},
+        { 'icon': Utensils, 'value': 'Merienda', 'label': "Merienda"},
+        { 'icon': CircleQuestionMark, 'value': 'Others', 'label': "Others"},
+      ]
     }
   ),
   getters: {
@@ -38,6 +50,7 @@ export const useExpenseStore = defineStore('expense', {
     async createExpenseTransaction(param) {
       try {
           const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', param)
+          this.recentTransaction.unshift(response.data.data)
           if(response.data.data.status === 'success') {
             await this.getTotalExpense()
           }

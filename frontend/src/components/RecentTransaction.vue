@@ -13,6 +13,11 @@ onMounted(async () => {
   }
 })
 
+function findCategoryIcon(category) {
+  const selected = store.categorySelection.find(item => item.value === category);
+  return selected.icon;
+}
+
 </script>
 
 <template>
@@ -21,6 +26,9 @@ onMounted(async () => {
         <div class="divide-y wrapper overflow-y-auto bg-gray-200 rounded-2xl px-3 h-75">
             <div class="box border-gray-400 flex text-base text-left py-3 items-center"
             v-for="(t, i) in store.recentTransaction" :key="i">
+                <div class="mx-3">
+                  <component :is="findCategoryIcon(t['category'])" />
+                </div>
                 <div class="w-1/2">
                   <div class="font-semibold">
                     {{ t['note'] }}

@@ -15,7 +15,7 @@
                 <label for="category" class="block text-gray-700 font-semibold mb-2">Category</label>
                 <select v-model="category" id="category" name="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">
                     <option value="" disabled selected>Select a category</option>
-                    <option v-for="(option, id) in categorySelection" :key="id" :value="option.value">
+                    <option v-for="(option, id) in store.categorySelection" :key="id" :value="option.value">
                         {{ option.label }}
                     </option>
                 </select>
@@ -32,7 +32,6 @@
                 </button>
                 <button @click="save" class="w-50 bg-gray-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
                     Continue
-                    {{ date }}
                 </button>                    
             </div>
         </div>
@@ -51,37 +50,32 @@ import { useExpenseStore } from '../store/ExpenseStore';
 const props = defineProps(['changePage'])
 const store = useExpenseStore()
 
-const date = ref(new Date().toISOString().slice(0, 10))
+const date = ref(getTodayPH())
 const amount = ref('')
 const note = ref('')
 const category = ref('')
-const categorySelection = [
-    { 'value': 'Bj Allowance', 'label': "Bj Allowance"},
-    { 'value': 'Tristan Allowance', 'label': "Tristan Allowance"},
-    { 'value': 'Lunch', 'label': "Lunch"},
-    { 'value': 'Dinner', 'label': "Dinner"},
-    { 'value': 'Breakfast', 'label': "Breakfast"},
-    { 'value': 'Leisure', 'label': "Leisure"},
-    { 'value': 'Date', 'label': "Date"},
-    { 'value': 'Merienda', 'label': "Merienda"},
-    { 'value': 'Others', 'label': "Others"},
-]
 
 async function create() {
     try {
-        console.log(date)
-        // await store.createExpenseTransaction({
-        //     note: note.value,
-        //     amount: amount.value,
-        //     date: date.value,
-        //     category: category.value
-        // }) 
-        // props.changePage('home');
+        await store.createExpenseTransaction({
+            note: note.value,
+            amount: amount.value,
+            date: date.value,
+            category: category.value
+        }) 
+        props.changePage('home');
     } catch (err) {
         console.log(err)
     }
 }
 
+function getTodayPH() {
+  const now = new Date()
+  // Convert to Philippine time by adding 8 hours (in milliseconds)
+  const offset = 8 * 60 * 60 * 1000
+  const phDate = new Date(now.getTime() + offset)
+  return phDate.toISOString().slice(0, 10)
+}
 
 async function save() {
     try {
