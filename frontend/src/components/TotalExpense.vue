@@ -1,19 +1,9 @@
 <script setup>
 
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { useExpenseStore } from '../store/ExpenseStore';
 
-const total = ref('');
-
-async function getTotalExpense() {
-  try {
-    const response = await axios.get(import.meta.env.VITE_API_URL + '/expense/total')
-    let amnt = formatAmount(response.data.data)
-    total.value = amnt
-  } catch (error) {
-    console.log(error)
-  }
-}
+const store = useExpenseStore()
 
 function formatAmount(amountStr) {
   const number = typeof amountStr === 'string' ? parseFloat(amountStr.replace(/,/g, '')) : amountStr;
@@ -24,7 +14,8 @@ function formatAmount(amountStr) {
 }
 
 onMounted(async () => {
-  await getTotalExpense()
+  console.log('get total')
+  await store.getTotalExpense();
 })
 </script>
 
@@ -33,7 +24,7 @@ onMounted(async () => {
     <div class="mx-auto w-90 items-center gap-x-4 rounded-2xl bg-gray-200 p-5 text-gray-800">
       <div>
           <div class="font-xs">Current Balance</div>
-          <div class="text-3xl font-bold pt-1 pb-1">PHP {{ total }}</div>
+          <div class="text-3xl font-bold pt-1 pb-1">PHP {{ formatAmount(store.totalExpense) }}</div>
       </div>
       <div class="flex items-center justify-between pt-1">
         <div>
@@ -48,7 +39,7 @@ onMounted(async () => {
           This Month's Expense
         </div>
         <div class="font-semibold">
-          PHP {{ total }}
+          PHP {{ formatAmount(store.totalExpense) }}
         </div>
       </div>
     </div>  

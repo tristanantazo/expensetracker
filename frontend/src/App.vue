@@ -24,7 +24,9 @@ const component_map = {
 <template>
   <div class="text-slate-300">
     <MenuBar :page-name="currentTabName" />
-    <component :is="currentTab" :changePage="changePayload"/>
+    <keep-alive>
+      <component :is="currentTab" :changePage="changePayload"/>
+    </keep-alive>
     
     <div class="fixed h-15 text-gray-700 bg-gray-200 w-100 bottom-0 flex">
       <div class="w-1/2 text-center">

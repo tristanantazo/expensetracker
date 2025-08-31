@@ -90,9 +90,8 @@ class GoogleApi {
 
     async create(data) {
         try {
-            var value_array = data.map(e => [this.createID(), ...e]);
-            
-            console.log(value_array)
+            const createdId = this.createID()
+            var value_array = data.map(e => [createdId, ...e]);
             
             const option = {
                 spreadsheetId: this.spread_sheet_id,
@@ -104,7 +103,14 @@ class GoogleApi {
                 }
             };
 
-            return await this.sheet.spreadsheets.values.append(option);            
+            const response = await this.sheet.spreadsheets.values.append(option);   
+
+            if(response.status == 200) {
+                return {
+                    id: createdId,
+                    response: response
+                }
+            }
         } catch (error) {
             return error;
         }

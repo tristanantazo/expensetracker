@@ -32,6 +32,7 @@
                 </button>
                 <button @click="save" class="w-50 bg-gray-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
                     Continue
+                    {{ date }}
                 </button>                    
             </div>
         </div>
@@ -45,11 +46,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { useExpenseStore } from '../store/ExpenseStore';
 
 const props = defineProps(['changePage'])
+const store = useExpenseStore()
 
-const date = ref('')
+const date = ref(new Date().toISOString().slice(0, 10))
 const amount = ref('')
 const note = ref('')
 const category = ref('')
@@ -67,15 +69,14 @@ const categorySelection = [
 
 async function create() {
     try {
-        const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', {
-            note: note.value,
-            amount: amount.value,
-            date: date.value,
-            category: category.value
-        })
-        console.log(response)
-        props.changePage('home');
-        //go to all expenses for this day
+        console.log(date)
+        // await store.createExpenseTransaction({
+        //     note: note.value,
+        //     amount: amount.value,
+        //     date: date.value,
+        //     category: category.value
+        // }) 
+        // props.changePage('home');
     } catch (err) {
         console.log(err)
     }
@@ -84,16 +85,7 @@ async function create() {
 
 async function save() {
     try {
-        const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', {
-            note: note.value,
-            amount: amount.value,
-            date: date.value,
-            category: category.value
-        })
-
-        //reload and add notif that the record added
     } catch (err) {
-        console.log(err)
     }
 }
 

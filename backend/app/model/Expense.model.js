@@ -39,7 +39,10 @@ class Expense {
         
           let result = await google_api.create(value_array);
 
-          return result;
+          if(result.response.status == 200) {
+            data['id'] = result.id;
+            return data;
+          }
     }
 
     async editTransaction(data) {
