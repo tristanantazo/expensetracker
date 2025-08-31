@@ -7,53 +7,15 @@ const GoogleApi = require('../utils/GoogleAPI');
 // class Expense extends Base {
 class Expense {
 
-     static sampleReturn() {
-        return {
-            'id': 1,
-            'description': 'sample description',
-            'amount': 100
-        }
-    }
-    
-    setExpenseDocument(data) {
-        return {
-            'amount': data['amount'],
-            'label': data['label'],
-            'category_id': data['category_id'],
-            'created_at': data['created_at'],
-            'updated_at': data['updated_at'],
-        }
-    }
-
-    async deleteDocument(id) {
-        const o_id = new ObjectId(id) 
-        let filter = { _id : o_id }
-        await this.delete(filter);
-    }
-
-    async editDocument(data) {
-        const o_id = new ObjectId(data.id)
-        let expense = this.setExpenseDocument(data)
-        let filter = {
-            _id : o_id
-        }
-        
-        expense.updated_at = Date.now();
-
-        return await this.update(filter, { $set : expense });
-    }
-
     async all() {
         try {
             let google_api = new GoogleApi({
                 range: "Sheet1!A:E",
                 spread_sheet_id: "1BkMlPnZ79c9B3mdrLzn1kPTjVDkkuz8CUsmT9CoVQJk", 
             });
-            
             await google_api.init();
-            const response = await google_api.accessSpreadsheet();
-
-            return this.formatData(response);
+            const response = await google_api.all();
+            return response;
         } catch (error) {
             return error
         }
@@ -64,10 +26,18 @@ class Expense {
             range: "Sheet1!B1",
             spread_sheet_id: "1BkMlPnZ79c9B3mdrLzn1kPTjVDkkuz8CUsmT9CoVQJk", 
           });
-        
           await google_api.init();
+
+          const value_array = [data].map((element, index) => {
+            return [
+                element['date'],
+                element['amount'],
+                element['note'],
+                element['category'],
+            ]
+        });
         
-          let result = await google_api.insertTransaction(data);
+          let result = await google_api.create(value_array);
 
           return result;
     }
@@ -80,7 +50,27 @@ class Expense {
 
         await google_api.init();
 
-        return await google_api.editTransaction(data);
+        const value_array = [params].map((element, index) => {
+            return [
+                element['id'],
+                element['date'],
+                element['amount'],
+                element['note'],
+                element['category'],
+            ]
+        });
+
+        return await google_api.edit(value_array);
+    }
+
+    async getTotal() {
+        const all_data = await this.all();
+
+        const total = all_data.reduce((sum, item) => {
+            return sum + parseFloat(item.amount.replace(/,/g, ''))
+        }, 0);
+
+        return total;
     }
 
     async deleteTransaction(data) {
@@ -91,20 +81,13 @@ class Expense {
 
         await google_api.init();
 
-        return await google_api.deleteTransaction(data);
+        return await google_api.delete(data);
     }
 
-    formatData(data) {
-        const [header, ...row] = data;
-        const objects = row.map(row => {
-            return header.reduce((obj, key, index) => {
-                obj[key] = row[index];
-                return obj;
-            }, {});
-        });
-
-        return objects;
+    async getById(){
+        return "id"
     }
+
 }
 
 module.exports = Expense;

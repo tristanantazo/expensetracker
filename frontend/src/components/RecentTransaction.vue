@@ -2,33 +2,84 @@
 import { ref, onMounted, reactive } from 'vue'
 import axios from 'axios'
 
-const recent_test = ref(null)
+const recent_test = ref([
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+  {
+    'amount': '20,000',
+    'date': '01/20/2004',
+    'note': 'Sample Note',
+    'category': 'Tristan Allowance',
+  },
+])
 
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3301/expense')
-    
-    console.log(response.data)
+    const response = await axios.get(import.meta.env.VITE_API_URL + '/expense')
     recent_test.value = response.data.data
   } catch (err) {
     console.log(err)
-  } finally {
   }
 })
 
 </script>
 
 <template>
-    <div class="p-4">
-        <div class="text-lg font-semibold text-gray-700 mb-3">Recent Transaction</div>
-        <div class="wrapper overflow-y-auto h-125">
-            <div class="box flex bg-white rounded-lg shadow-lg h-15 text-gray-700 text-base text-left mb-3 p-3 items-center"
-                v-for="t in recent_test">
+    <div class="pr-5 pl-5 text-gray-800">
+        <div class="text-lg font-bold mb-3">Recent Transaction</div>
+        <div class="divide-y wrapper overflow-y-auto bg-gray-200 rounded-2xl px-3 h-75">
+            <div class="box border-gray-400 flex text-base text-left py-3 items-center"
+            v-for="(t, i) in recent_test" :key="i">
+                <div class="w-1/2">
+                  <div class="font-semibold">
+                    {{ t['note'] }}
+                  </div>
+                  <div class="text-xs">
+                    {{ t['date'] }}
+                  </div>
+                </div>
                 <div class="w-1/2 text-center">{{ t['amount'] }}</div>
-                <div class="w-1/2 text-center">{{ t['note'] }}</div>
-                <div class="w-1/2 text-center">{{ t['date'] }}</div>
-                <div class="w-1/2 text-center">{{ t['category'] }}</div>
             </div>
         </div>
     </div>

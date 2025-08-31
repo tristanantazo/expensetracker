@@ -1,66 +1,67 @@
 <script setup>
 import TotalExpense from './components/TotalExpense.vue'
 import MenuBar from './components/MenuBar.vue'
-import RecentTransaction from './components/RecentTransaction.vue'
+import Home from './components/Home.vue'
+import AddForm from './components/AddForm.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
 
-import { ref } from 'vue'
+import { ref, markRaw } from 'vue'
 
-let current_payload = ref('home')
+const currentTab = ref(markRaw(Home));
+const currentTabName = ref('Home');
 
 function changePayload(payload) {
-  current_payload.value = payload;
+  currentTab.value = component_map[payload];
+  currentTabName.value = payload;
+}
+
+const component_map = {
+  'home': markRaw(Home),
+  'add': markRaw(AddForm),
 }
 </script>
 
 <template>
-  <MenuBar/>
-  <Transition name="slide-fade">
-    <div class="card" v-if="current_payload == 'home'">
-      <TotalExpense/>
-      <RecentTransaction/>
-    </div>
-  </Transition>
-  <div class="fixed h-15 text-gray-700 bg-white w-100 bottom-0 flex">
-    <div class="w-1/2 text-center">
-      <button class="bg-white h-full">
-        <House 
-          size="20"
-          color="red"
-        />
-      </button>
-    </div>
-    <div class="w-1/2 text-center">
-      <button class="bg-white h-full">
-        <ChartLine
-          size="20"
-          color="red"
-        />
-      </button>
-    </div>
-    <div class="w-1/2 text-center">
-      <button class="bg-white h-full" @click="changePayload('add')">  
-        <Plus
-          size="20"
-          color="red"
-        />
-      </button>
-    </div>
-    <div class="w-1/2 text-center">
-      <button class="bg-white h-full">
-        <CalendarDays
-          size="20"
-          color="red"
-        />
-      </button>
-    </div>
-    <div class="w-1/2 text-center">
-      <button class="bg-white h-full">
-        <Wallet
-          size="20"
-          color="red"
-        />
-      </button>
+  <div class="text-slate-300">
+    <MenuBar :page-name="currentTabName" />
+    <component :is="currentTab" :changePage="changePayload"/>
+    
+    <div class="fixed h-15 text-gray-700 bg-gray-200 w-100 bottom-0 flex">
+      <div class="w-1/2 text-center">
+        <button class=" h-full" @click="changePayload('home')">
+          <House 
+            size="20"
+          />
+        </button>
+      </div>
+      <div class="w-1/2 text-center">
+        <button class=" h-full">
+          <ChartLine
+            size="20"
+          />
+        </button>
+      </div>
+      <div class="w-1/2 text-center">
+        <button class=" h-full" @click="changePayload('add')">  
+          <Plus
+            size="20"
+          />
+        </button>
+      </div>
+      <div class="w-1/2 text-center">
+        <button class=" h-full">
+          <CalendarDays
+            size="20"
+          />
+        </button>
+      </div>
+      <div class="w-1/2 text-center">
+        <button class=" h-full">
+          <Wallet
+            size="20"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </template>

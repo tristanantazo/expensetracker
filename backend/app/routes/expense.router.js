@@ -6,13 +6,16 @@ const {
     getExpenseById,
     insertExpense,
     deleteExpense,
-    updateExpense
+    updateExpense,
+    getTotalExpense
  } = require('../controllers/Expense.controller')
 
-expense.get('/:id', getExpenseById);
-expense.post('/insert', insertExpense);
-expense.post('/delete', deleteExpense);
-expense.post('/update', updateExpense);
-expense.get('/', getAllExpense);
+ expense.get('/', getAllExpense);
+ expense.get('/total', getTotalExpense);
+ expense.get('/:id', getExpenseById);
+ 
+ expense.post('/insert', insertExpense);
+ expense.post('/delete', deleteExpense);
+ expense.post('/update', updateExpense);
 
 module.exports = expense;
