@@ -22,7 +22,8 @@ export const useExpenseStore = defineStore('expense', {
         { 'icon': MessageSquareHeart, 'value': 'Date', 'label': "Date"},
         { 'icon': Utensils, 'value': 'Merienda', 'label': "Merienda"},
         { 'icon': CircleQuestionMark, 'value': 'Others', 'label': "Others"},
-      ]
+      ],
+      loader: false
     }
   ),
   getters: {
@@ -32,11 +33,14 @@ export const useExpenseStore = defineStore('expense', {
   },
   actions: {
     async getRecentTransaction() {
+      this.loader = true;
       try {
         const response = await axios.get(import.meta.env.VITE_API_URL + '/expense')
         this.recentTransaction = response.data.data
       } catch (error) {
         console.log(error)
+      } finally {
+        this.loader = false
       }
     },
     async getTotalExpense() {
@@ -48,6 +52,7 @@ export const useExpenseStore = defineStore('expense', {
       }
     },
     async createExpenseTransaction(param) {
+      this.loader = true;
       try {
           const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', param)
           this.recentTransaction.unshift(response.data.data)
@@ -56,6 +61,9 @@ export const useExpenseStore = defineStore('expense', {
           }
       } catch (err) {
           console.log(err)
+      } finally {
+        // always runs (cleanup, loading false, etc.)
+        this.loader = false
       }
     }
   },

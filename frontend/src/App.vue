@@ -1,12 +1,13 @@
 <script setup>
-import TotalExpense from './components/TotalExpense.vue'
 import MenuBar from './components/MenuBar.vue'
 import Home from './components/Home.vue'
 import AddForm from './components/AddForm.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
+import { ref, markRaw, watchEffect } from 'vue'
+import Loader from './components/Loader.vue'
+import { useExpenseStore } from './store/ExpenseStore';
 
-import { ref, markRaw } from 'vue'
-
+const store = useExpenseStore()
 const currentTab = ref(markRaw(Home));
 const currentTabName = ref('Home');
 
@@ -19,15 +20,16 @@ const component_map = {
   'home': markRaw(Home),
   'add': markRaw(AddForm),
 }
+
 </script>
 
 <template>
   <div class="text-slate-300">
+    <Loader v-if="store.loader"/>
     <MenuBar :page-name="currentTabName" />
     <keep-alive>
       <component :is="currentTab" :changePage="changePayload"/>
     </keep-alive>
-    
     <div class="fixed h-15 text-gray-700 bg-gray-200 w-100 bottom-0 flex">
       <div class="w-1/2 text-center">
         <button class=" h-full" @click="changePayload('home')">
