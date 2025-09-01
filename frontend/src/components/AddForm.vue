@@ -71,7 +71,6 @@ async function create() {
 
 function getTodayPH() {
   const now = new Date()
-  // Convert to Philippine time by adding 8 hours (in milliseconds)
   const offset = 8 * 60 * 60 * 1000
   const phDate = new Date(now.getTime() + offset)
   return phDate.toISOString().slice(0, 10)

@@ -27,9 +27,23 @@ export const useExpenseStore = defineStore('expense', {
     }
   ),
   getters: {
-    total(state) {
-      return 
+    getThisMonthExpense(state) {
+      const today = new Date()
+      
+      return state.recentTransaction.filter((e, i, a) => {
+        const inputDate = new Date(e.date)
+        return (
+          inputDate.getFullYear() === today.getFullYear() && inputDate.getMonth() === today.getMonth()
+        )
+      })
     },
+    getThisMonthTotal() {
+      const total = this.getThisMonthExpense.reduce((sum, item) => {
+        return sum + parseFloat(item.amount.replace(/,/g, ''))
+      }, 0);
+
+      return total;
+    }
   },
   actions: {
     async getRecentTransaction() {

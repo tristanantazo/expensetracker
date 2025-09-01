@@ -2,6 +2,7 @@
 import MenuBar from './components/MenuBar.vue'
 import Home from './components/Home.vue'
 import AddForm from './components/AddForm.vue';
+import AllExpenses from './components/AllExpenses.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
 import { ref, markRaw, watchEffect } from 'vue'
 import Loader from './components/Loader.vue'
@@ -19,6 +20,7 @@ function changePayload(payload) {
 const component_map = {
   'home': markRaw(Home),
   'add': markRaw(AddForm),
+  'all_expenses': markRaw(AllExpenses)
 }
 
 </script>

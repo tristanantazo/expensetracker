@@ -24,7 +24,7 @@ onMounted(async () => {
     <div class="mx-auto w-90 items-center gap-x-4 rounded-2xl bg-gray-200 p-5 text-gray-800">
       <div>
           <div class="font-xs">Current Balance</div>
-          <div class="text-3xl font-bold pt-1 pb-1">PHP {{ formatAmount(store.totalExpense) }}</div>
+          <div class="text-3xl font-bold pt-1 pb-1">PHP {{ formatAmount(store.getThisMonthTotal) }}</div>
       </div>
       <div class="flex items-center justify-between pt-1">
         <div>

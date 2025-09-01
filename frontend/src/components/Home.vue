@@ -3,7 +3,7 @@
       <TotalExpense/>
       <div class="p-5">
         <div class="text-gray-800 mb-3 flex items-center justify-between">
-          <button @click="changePageHandler" class="bg-gray-200 font-semibold w-42 h-16 rounded-2xl flex items-center justify-between">
+          <button @click="changePageHandler('add')" class="bg-gray-200 font-semibold w-42 h-16 rounded-2xl flex items-center justify-between">
             <CirclePlus class="mr-2" size="20"/>
             Add Expense
           </button>
@@ -23,7 +23,7 @@
           </button>
         </div>
       </div>
-      <RecentTransaction/>
+      <RecentTransaction :changePayload="changePageHandler"/>
     </div>
 </template>
 
@@ -34,8 +34,8 @@ import RecentTransaction from './RecentTransaction.vue'
 
 const props = defineProps(['changePage'])
 
-function changePageHandler() {
-  props.changePage('add');
+function changePageHandler(params) {
+  props.changePage(params);
 }
 
 </script>

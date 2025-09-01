@@ -2,7 +2,13 @@
 import { ref, onMounted, reactive } from 'vue'
 import { useExpenseStore } from '../store/ExpenseStore';
 
+const props = defineProps(['changePayload'])
 const store = useExpenseStore()
+
+function changePageHandler(params) {
+  props.changePayload(params);
+}
+
 
 onMounted(async () => {
   try {
@@ -22,10 +28,13 @@ function findCategoryIcon(category) {
 
 <template>
     <div class="pr-5 pl-5 text-gray-800">
-        <div class="text-lg font-bold mb-3">Recent Transaction</div>
+      <div class="flex items-center justify-between mb-3">
+        <div class="text-lg font-bold">Recent Transaction</div>
+        <div><button class="text-sm" @click="changePageHandler('all_expenses')"> See All </button></div>
+      </div>
         <div class="divide-y wrapper overflow-y-auto bg-gray-200 rounded-2xl px-3 h-75">
             <div class="box border-gray-400 flex text-base text-left py-3 items-center"
-            v-for="(t, i) in store.recentTransaction" :key="i">
+            v-for="(t, i) in store.getThisMonthExpense" :key="i">
                 <div class="mx-3">
                   <component :is="findCategoryIcon(t['category'])" />
                 </div>
