@@ -15,7 +15,14 @@ class Expense {
             });
             await google_api.init();
             const response = await google_api.all();
-            return response;
+
+            const sortedData = response.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA;
+            });
+            
+            return sortedData;
         } catch (error) {
             return error
         }

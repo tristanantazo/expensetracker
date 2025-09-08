@@ -4,7 +4,7 @@ import Home from './components/Home.vue'
 import AddForm from './components/AddForm.vue';
 import AllExpenses from './components/AllExpenses.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
-import { ref, markRaw, watchEffect } from 'vue'
+import { ref, markRaw, watchEffect, onMounted } from 'vue'
 import Loader from './components/Loader.vue'
 import { useExpenseStore } from './store/ExpenseStore';
 
@@ -22,6 +22,15 @@ const component_map = {
   'add': markRaw(AddForm),
   'all_expenses': markRaw(AllExpenses)
 }
+
+onMounted(async () => {
+  try {
+    console.log('get all expense')
+    store.getAllExpenses()
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 </script>
 

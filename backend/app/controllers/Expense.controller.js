@@ -51,9 +51,8 @@ const updateExpense = async (req, res) => {
 const getAllExpense = async (req, res) => {
     try {
         let expense = await (new Expense).all();
-        res.json(responseSuccess(expense.reverse()));
+        res.json(responseSuccess(expense));
     } catch (error) {
-        console.log(error)
         res.json({
             'error': error
         })  
@@ -65,7 +64,6 @@ const getTotalExpense = async (req, res) => {
         let expense = await (new Expense).getTotal();
         res.json(responseSuccess(expense));
     } catch (error) {
-        console.log(error)
         res.json({
             'error': error
         })  

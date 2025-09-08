@@ -9,16 +9,6 @@ function changePageHandler(params) {
   props.changePayload(params);
 }
 
-
-onMounted(async () => {
-  try {
-    console.log('get all expense')
-    store.getRecentTransaction()
-  } catch (err) {
-    console.log(err)
-  }
-})
-
 function findCategoryIcon(category) {
   const selected = store.categorySelection.find(item => item.value === category);
   return selected.icon;
@@ -34,7 +24,7 @@ function findCategoryIcon(category) {
       </div>
         <div class="divide-y wrapper overflow-y-auto bg-gray-200 rounded-2xl px-3 h-75">
             <div class="box border-gray-400 flex text-base text-left py-3 items-center"
-            v-for="(t, i) in store.getThisMonthExpense" :key="i">
+            v-for="(t, i) in store.getRecentExpenses" :key="i">
                 <div class="mx-3">
                   <component :is="findCategoryIcon(t['category'])" />
                 </div>
