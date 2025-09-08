@@ -63,10 +63,10 @@ function findCategoryIcon(category) {
 
 function getTotalForDay(group) {
   const total = group.reduce((sum, item) => {
-      return sum + parseFloat(item.amount.replace(/,/g, ''))
+      return sum + parseFloat(String(item.amount).replace(/,/g, ''))
   }, 0);
 
-  return total;
+  return formatAmount(total);
 }
 
 function getDay(params) {

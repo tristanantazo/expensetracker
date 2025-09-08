@@ -41,6 +41,7 @@ onMounted(async () => {
     <keep-alive>
       <component :is="currentTab" :changePage="changePayload"/>
     </keep-alive>
+    <div class="h-15"></div>
     <div class="fixed h-15 text-gray-700 bg-gray-200 w-100 bottom-0 flex">
       <div class="w-1/2 text-center">
         <button class=" h-full" @click="changePayload('home')">

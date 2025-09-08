@@ -57,15 +57,32 @@ const category = ref('')
 
 async function create() {
     try {
+        await storeTransaction();
+        props.changePage('home');
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function save() {
+    try {
+        await storeTransaction();
+    } catch (err) {
+        return err;
+    }
+}
+
+async function storeTransaction() {
+    try {
         await store.createExpenseTransaction({
             note: note.value,
             amount: amount.value,
             date: date.value,
             category: category.value
         }) 
-        props.changePage('home');
-    } catch (err) {
-        console.log(err)
+        clearAllRefs();
+    } catch (error) {
+        return error;
     }
 }
 
@@ -76,15 +93,26 @@ function getTodayPH() {
   return phDate.toISOString().slice(0, 10)
 }
 
-async function save() {
-    try {
-    } catch (err) {
-    }
+// Clear or reset function
+function clearAllRefs() {
+    note.value = ''
+    amount.value = ''
+    date.value = ''
+    category.value = ''
 }
 
-function validate() {
 
-}
-
+/**
+ * Category proper
+ * Tristan Allowance
+ * Bj Allowance
+ * Groceries
+ * House expenses
+ * Date
+ * Lunch
+ * Dinner
+ * Breakfast
+ * Other
+ */
 </script>
 

@@ -40,7 +40,7 @@ export const useExpenseStore = defineStore('expense', {
     },
     getThisMonthTotal() {
       const total = this.getThisMonthExpense.reduce((sum, item) => {
-        return sum + parseFloat(item.amount.replace(/,/g, ''))
+        return sum + parseFloat(String(item.amount).replace(/,/g, ''))
       }, 0);
 
       return total;
@@ -89,9 +89,7 @@ export const useExpenseStore = defineStore('expense', {
       try {
           const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', param)
           this.allExpenses.unshift(response.data.data)
-          if(response.data.data.status === 'success') {
-            await this.getTotalExpense()
-          }
+          await this.getAllExpenses();
       } catch (err) {
           console.log(err)
       } finally {
