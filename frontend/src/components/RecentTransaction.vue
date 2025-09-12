@@ -11,7 +11,7 @@ function changePageHandler(params) {
 
 function findCategoryIcon(category) {
   const selected = store.categorySelection.find(item => item.value === category);
-  return selected.icon;
+  return selected ? selected.icon:'';
 }
 
 </script>
