@@ -88,7 +88,7 @@ class GoogleApi {
         }
     }
 
-    async create(data) {
+    async create(data, valueInputOption = 'USER_ENTERED', insertDataOption = 'INSERT_ROWS') {
         try {
             const createdId = this.createID()
             var value_array = data.map(e => [createdId, ...e]);
@@ -96,12 +96,14 @@ class GoogleApi {
             const option = {
                 spreadsheetId: this.spread_sheet_id,
                 range: this.range,
-                valueInputOption: 'USER_ENTERED',
-                insertDataOption: 'INSERT_ROWS',
+                valueInputOption: valueInputOption,
+                insertDataOption: insertDataOption,
                 requestBody: {
                     values: value_array
                 }
             };
+
+            console.log(option)
 
             const response = await this.sheet.spreadsheets.values.append(option);   
 

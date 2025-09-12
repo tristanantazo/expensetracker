@@ -17,7 +17,7 @@
             <LibraryBig class="mr-2" size="20"/>
             Reports
           </button>
-          <button class="bg-gray-200 font-semibold w-42 h-16 round-lg flex items-center justify-between">
+          <button @click="changePageHandler('user_setting')" class="bg-gray-200 font-semibold w-42 h-16 round-lg flex items-center justify-between">
             <Settings class="mr-2" size="20"/>
             Settings
           </button>

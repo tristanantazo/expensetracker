@@ -23,7 +23,7 @@ function findCategoryIcon(category) {
         <div><button class="text-sm" @click="changePageHandler('all_expenses')"> See All </button></div>
       </div>
         <div class="divide-y wrapper overflow-y-auto bg-gray-200 rounded-2xl px-3 h-75">
-            <div class="box border-gray-400 flex text-base text-left py-3 items-center"
+            <div @click="changePageHandler('edit_expenses')" class="box border-gray-400 flex text-base text-left py-3 items-center"
             v-for="(t, i) in store.getRecentExpenses" :key="i">
                 <div class="mx-3">
                   <component :is="findCategoryIcon(t['category'])" />

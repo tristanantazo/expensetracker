@@ -15,8 +15,8 @@
                 <label for="category" class="block text-gray-700 font-semibold mb-2">Category</label>
                 <select v-model="category" id="category" name="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">
                     <option value="" disabled selected>Select a category</option>
-                    <option v-for="(option, key) in userStore.category" :key="key" :value="option.id">
-                        {{ option.name }}
+                    <option v-for="(option, id) in store.categorySelection" :key="id" :value="option.value">
+                        {{ option.label }}
                     </option>
                 </select>
             </div>
@@ -27,12 +27,9 @@
             </div>
 
             <div class="flex">
-                <button @click="create" class="w-80 bg-gray-400 mr-3 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
+                <button @click="save" class="w-80 bg-gray-400 mr-3 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
                     Save
-                </button>
-                <button @click="save" class="w-50 bg-gray-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
-                    Continue
-                </button>                    
+                </button>                
             </div>
         </div>
         <div class="bg-gray-200 my-5 p-5 rounded-2xl w-full max-w-md">
@@ -46,25 +43,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useExpenseStore } from '../store/ExpenseStore';
-import { useUserStore } from '../store/UserStore';
 
 const props = defineProps(['changePage'])
 const store = useExpenseStore()
-const userStore = useUserStore()
 
 const date = ref(getTodayPH())
 const amount = ref('')
 const note = ref('')
 const category = ref('')
-
-async function create() {
-    try {
-        await storeTransaction();
-        props.changePage('home');
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 async function save() {
     try {

@@ -2,13 +2,16 @@
 import MenuBar from './components/MenuBar.vue'
 import Home from './components/Home.vue'
 import AddForm from './components/AddForm.vue';
+import EditForm from './components/EditForm.vue';
+import UserSetting from './components/UserSetting.vue';
 import AllExpenses from './components/AllExpenses.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
 import { ref, markRaw, watchEffect, onMounted } from 'vue'
 import Loader from './components/Loader.vue'
 import { useExpenseStore } from './store/ExpenseStore';
-
-const store = useExpenseStore()
+import { useUserStore } from './store/UserStore';
+const userStore = useUserStore()
+const expenseStore = useExpenseStore()
 const currentTab = ref(markRaw(Home));
 const currentTabName = ref('Home');
 
@@ -20,13 +23,16 @@ function changePayload(payload) {
 const component_map = {
   'home': markRaw(Home),
   'add': markRaw(AddForm),
-  'all_expenses': markRaw(AllExpenses)
+  'all_expenses': markRaw(AllExpenses),
+  'edit_expenses': markRaw(EditForm),
+  'user_setting': markRaw(UserSetting),
 }
 
 onMounted(async () => {
   try {
     console.log('get all expense')
-    store.getAllExpenses()
+    await expenseStore.getAllExpenses();
+    await userStore.getUserSetting();
   } catch (err) {
     console.log(err)
   }
@@ -36,7 +42,7 @@ onMounted(async () => {
 
 <template>
   <div class="text-slate-300">
-    <Loader v-if="store.loader"/>
+    <Loader v-if="expenseStore.loader"/>
     <MenuBar :page-name="currentTabName" />
     <keep-alive>
       <component :is="currentTab" :changePage="changePayload"/>

@@ -24,7 +24,8 @@ export const useExpenseStore = defineStore('expense', {
         { 'icon': Utensils, 'value': 'Merienda', 'label': "Merienda"},
         { 'icon': CircleQuestionMark, 'value': 'Others', 'label': "Others"},
       ],
-      loader: false
+      loader: false,
+      api_error: ''
     }
   ),
   getters: {
@@ -62,6 +63,9 @@ export const useExpenseStore = defineStore('expense', {
       }
 
       return dateMap;
+    },
+    getAPIError(state) {
+      return state.api_error;
     }
   },
   actions: {
@@ -71,6 +75,7 @@ export const useExpenseStore = defineStore('expense', {
         this.totalExpense = response.data.data
       } catch (error) {
         console.log(error)
+        this.api_error = error
       }
     },
     async getAllExpenses() {
@@ -80,6 +85,7 @@ export const useExpenseStore = defineStore('expense', {
         this.allExpenses = response.data.data
       } catch (error) {
         console.log(error)
+        this.api_error = error
       } finally {
         this.loader = false
       }
@@ -92,6 +98,7 @@ export const useExpenseStore = defineStore('expense', {
           await this.getAllExpenses();
       } catch (err) {
           console.log(err)
+          this.api_error = err
       } finally {
         // always runs (cleanup, loading false, etc.)
         this.loader = false
