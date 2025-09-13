@@ -12,7 +12,8 @@ export const useUserStore = defineStore('user', {
         first_name: '',
         last_name: '',
         account: [],
-        category: []
+        category: [],
+        loader: false
     }),
     getters: {
 
@@ -32,11 +33,14 @@ export const useUserStore = defineStore('user', {
         },
         async saveUser(params) {
             try {
+                this.loader = true
                 const response = await axios.post(import.meta.env.VITE_API_URL + '/user', params)
                 this.user = response.data.data
             } catch (error) {
                 console.log(error)
                 this.api_error = error
+            } finally {
+                this.loader = false;
             }
         },
     }

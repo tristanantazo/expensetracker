@@ -3,6 +3,7 @@ import MenuBar from './components/MenuBar.vue'
 import Home from './components/Home.vue'
 import AddForm from './components/AddForm.vue';
 import EditForm from './components/EditForm.vue';
+import UploadReceiptForm from './components/UploadReceiptForm.vue';
 import UserSetting from './components/UserSetting.vue';
 import AllExpenses from './components/AllExpenses.vue';
 import { Plus, CalendarDays, ChartLine, House, Wallet } from 'lucide-vue-next';
@@ -12,8 +13,8 @@ import { useExpenseStore } from './store/ExpenseStore';
 import { useUserStore } from './store/UserStore';
 const userStore = useUserStore()
 const expenseStore = useExpenseStore()
-const currentTab = ref(markRaw(Home));
-const currentTabName = ref('Home');
+const currentTab = ref(markRaw(UploadReceiptForm));
+const currentTabName = ref('upload_receipt');
 
 function changePayload(payload) {
   currentTab.value = component_map[payload];
@@ -26,11 +27,11 @@ const component_map = {
   'all_expenses': markRaw(AllExpenses),
   'edit_expenses': markRaw(EditForm),
   'user_setting': markRaw(UserSetting),
+  'upload_receipt': markRaw(UploadReceiptForm),
 }
 
 onMounted(async () => {
   try {
-    console.log('get all expense')
     await expenseStore.getAllExpenses();
     await userStore.getUserSetting();
   } catch (err) {
@@ -42,7 +43,7 @@ onMounted(async () => {
 
 <template>
   <div class="text-slate-300">
-    <Loader v-if="expenseStore.loader"/>
+    <Loader v-if="expenseStore.loader || userStore.loader"/>
     <MenuBar :page-name="currentTabName" />
     <keep-alive>
       <component :is="currentTab" :changePage="changePayload"/>
@@ -64,7 +65,7 @@ onMounted(async () => {
         </button>
       </div>
       <div class="w-1/2 text-center">
-        <button class=" h-full" @click="changePayload('add')">  
+        <button class=" h-full" @click="changePayload('upload_receipt')">  
           <Plus
             size="20"
           />

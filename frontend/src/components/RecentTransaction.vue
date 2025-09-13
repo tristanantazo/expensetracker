@@ -26,7 +26,7 @@ function findCategoryIcon(category) {
             <div @click="changePageHandler('edit_expenses')" class="box border-gray-400 flex text-base text-left py-3 items-center"
             v-for="(t, i) in store.getRecentExpenses" :key="i">
                 <div class="mx-3">
-                  <component :is="findCategoryIcon(t['category'])" />
+                  <!-- <component :is="findCategoryIcon(t['category'])" /> -->
                 </div>
                 <div class="w-1/2">
                   <div class="font-semibold">

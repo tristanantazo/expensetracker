@@ -50,10 +50,7 @@
             <div class="flex">
                 <button @click="saveRecord" class="w-80 bg-gray-400 mr-3 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
                     Save
-                </button>
-                <button class="w-50 bg-gray-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
-                    Continue
-                </button>                    
+                </button>                
             </div>
         </div>
         <div v-if="modalStatus" class="w-full text-center bg-gray-600/80 fixed inset-0">

@@ -24,7 +24,7 @@
               </div>
               <div v-for="(e, i) in group" :key="i" class="box border-gray-400 flex text-base text-left py-3 items-center">
                 <div class="mx-3">
-                  <component :is="findCategoryIcon(e['category'])" />
+                  <!-- <component :is="findCategoryIcon(e['category'])" /> -->
                 </div>
                 <div class="w-1/2">
                   <div class="font-semibold">
@@ -58,7 +58,7 @@ const store = useExpenseStore()
 
 function findCategoryIcon(category) {
   const selected = store.categorySelection.find(item => item.value === category);
-  return selected.icon;
+  return selected ? selected.icon:'';
 }
 
 function getTotalForDay(group) {
