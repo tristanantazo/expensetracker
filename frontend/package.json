@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.19.0",
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.11.0",
     "lucide-vue-next": "^0.539.0",

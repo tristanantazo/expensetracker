@@ -25,7 +25,13 @@ export const useExpenseStore = defineStore('expense', {
         { 'icon': CircleQuestionMark, 'value': 'Others', 'label': "Others"},
       ],
       loader: false,
-      api_error: ''
+      api_error: '',
+      form: {
+        amount: 0,
+        date: '',
+        note: '',
+        category: '',
+      }
     }
   ),
   getters: {
@@ -91,9 +97,15 @@ export const useExpenseStore = defineStore('expense', {
       }
     },
     async createExpenseTransaction(param) {
+
+      this.form.date = param.date;
+      this.form.note = param.store;
+      this.form.amount = param.amount;
+      this.form.category = typeof param.category !== "undefined" ? param.category : 'other';
+
       this.loader = true;
       try {
-          const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', param)
+          const response = await axios.post(import.meta.env.VITE_API_URL + '/expense/insert', this.form)
           this.allExpenses.unshift(response.data.data)
           await this.getAllExpenses();
       } catch (err) {
