@@ -15,7 +15,9 @@ let stream = null
 
 const startCamera = async () => {
   try {
-    stream = await navigator.mediaDevices.getUserMedia({ video: true })
+    stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: { exact: "environment" } } // Rear camera
+     })
     if (video.value) {
       video.value.srcObject = stream
     }
