@@ -8,6 +8,9 @@
             </button>
         </div>
         <canvas ref="canvas" style="display: none;"></canvas>
+        <p>
+          {{ chagptRes }}
+        </p>
         <p class="text-gray-700 text-center my-5 py-3">
           Please review the store, date, and amount details above, then click the save button to record this expense.
         </p>
@@ -15,7 +18,7 @@
 </template>
 
 <script setup>
-import {GoogleGenAI} from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import { ref, onUnmounted, onMounted } from 'vue'
 import { useExpenseStore } from '../store/ExpenseStore';
 import { Camera } from 'lucide-vue-next';
@@ -25,9 +28,10 @@ const props = defineProps(['changePage'])
 const video = ref(null)
 const canvas = ref(null)
 const photo = ref(null)
+const chagptRes = ref(null);
 let stream = null
 
-const ai = new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY});
+const ai = new GoogleGenAI({apiKey: "AIzaSyBr86ZZWdMncDQlpdSpMdz7PaJgB72v6Oo"});
 
 const startCamera = async () => {
   try {
@@ -73,11 +77,16 @@ const takePhoto = async () => {
         contents: contents,
     });
 
-    let res = JSON.parse(response.text.replace(/```json|```/g, '').trim());
-    res.date = getTodayPH()
-    await expenseStore.createExpenseTransaction(res)
+    console.log(response.text)
+    chagptRes.value = JSON.parse(response.text.replace(/```json|```/g, '').trim());
 
-    props.changePage('all_expenses');
+
+    chagptRes.value.date = getTodayPH()
+
+
+    // await expenseStore.createExpenseTransaction(chagptRes)
+
+    // props.changePage('all_expenses');
 }
 
 function getTodayPH() {
